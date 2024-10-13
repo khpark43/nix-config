@@ -80,7 +80,7 @@
     #media-session.enable = true;
   };
 
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
   };
   services.xserver.videoDrivers = ["nvidia"];
@@ -119,8 +119,8 @@
   };
 
   environment.gnome.excludePackages = with pkgs; [
-    gnome.epiphany
-    gnome.geary
+    epiphany
+    geary
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
