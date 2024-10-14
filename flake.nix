@@ -41,7 +41,7 @@
     homeConfigurations = {
       khp = home-manager.lib.homeManagerConfiguration {
         modules = [./home/khp];
-        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        pkgs = import nixpkgs { system = "x86_64-linux"; config.allowUnfree = true; };
 	extraSpecialArgs = {
 	  inherit inputs outputs;
 	};

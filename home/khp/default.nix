@@ -39,6 +39,7 @@
     # '')
     pkgs.neofetch
     pkgs.wl-clipboard
+    pkgs.zed-editor
   ];
 
   home.file = {
@@ -50,7 +51,7 @@
   };
 
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    EDITOR = "nvim";
   };
 
   programs.home-manager.enable = true;

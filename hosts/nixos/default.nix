@@ -113,6 +113,9 @@
     vim
     wget
     curl
+    vesktop
+    cudatoolkit
+    linuxPackages.nvidia_x11
   ];
   environment.variables = {
     EDITOR = "vim";
