@@ -5,9 +5,9 @@
   config,
   outputs,
   ...
-}: {
+}:
+{
   imports = [
-    inputs.nixvim.homeManagerModules.nixvim
     ./desktop/firefox.nix
     ./desktop/kitty.nix
     ./cli/zsh.nix
@@ -25,13 +25,6 @@
   # release notes.
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
-  programs.nixvim = {
-    enable = true;
-
-    colorschemes.catppuccin.enable = true;
-    plugins.lualine.enable = true;
-  };
-
   home.packages = [
     # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
     # (pkgs.writeShellScriptBin "my-hello" ''
@@ -40,6 +33,8 @@
     pkgs.neofetch
     pkgs.wl-clipboard
     pkgs.zed-editor
+    pkgs.mysql-workbench
+    inputs.nixvim.packages.${pkgs.system}.default
   ];
 
   home.file = {
@@ -52,6 +47,7 @@
 
   home.sessionVariables = {
     EDITOR = "nvim";
+    BROWSER = "${pkgs.firefox}/bin/firefox";
   };
 
   programs.home-manager.enable = true;
@@ -79,5 +75,15 @@
       fcitx5-gtk
       fcitx5-hangul
     ];
+  };
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "text/html" = "firefox.desktop";
+      "x-scheme-handler/http" = "firefox.desktop";
+      "x-scheme-handler/https" = "firefox.desktop";
+      "x-scheme-handler/about" = "firefox.desktop";
+      "x-scheme-handler/unknown" = "firefox.desktop";
+    };
   };
 }

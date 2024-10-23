@@ -4,6 +4,7 @@
   imports = [
     ./hardware-configuration.nix
   ];
+  virtualisation.docker.enable = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Bootloader.
