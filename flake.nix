@@ -28,7 +28,7 @@
   in {
     nixosConfigurations = {
       nixos = nixpkgs.lib.nixosSystem {
-        system = "x64_64-linux";
+        system = "x84_64-linux";
         modules = [./hosts/nixos];
         specialArgs = {
           inherit inputs outputs;
