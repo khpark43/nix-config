@@ -62,6 +62,10 @@
   };
   programs.chromium = {
     enable = true;
+    extensions = [
+      { id = "nngceckbapebfimnlniiiahkandclblb"; } # bitwarden
+      { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # ublock origin
+    ];
   };
   programs.direnv = {
     enable = true;
