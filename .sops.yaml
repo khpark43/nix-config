@@ -1,0 +1,7 @@
+keys:
+  - &primary age1vgf3ur50a29pq33cvjftu88z6cy00pf7zh3agga44qtuak9umvtsalmxrx
+creation_rules:
+  - path_regex: hosts/nixos/secrets.ya?ml$
+    key_groups:
+      - age:
+        - *primary

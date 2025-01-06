@@ -12,6 +12,7 @@
     ./desktop/kitty.nix
     ./cli/zsh.nix
     ./cli/git.nix
+    ./cli/gpg.nix
   ];
   home.username = "khp";
   home.homeDirectory = "/home/khp";
@@ -33,7 +34,6 @@
     pkgs.neofetch
     pkgs.wl-clipboard
     pkgs.zed-editor
-    pkgs.mysql-workbench
     inputs.nixvim.packages.${pkgs.system}.default
   ];
 
