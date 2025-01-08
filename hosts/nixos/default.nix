@@ -55,10 +55,6 @@
   ];
   services.displayManager = {
     enable = true;
-    # autoLogin = {
-    #   enable = true;
-    #   user = "khp";
-    # };
     defaultSession = "gnome";
   };
   services.xserver = {
@@ -79,8 +75,8 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
+
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
