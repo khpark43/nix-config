@@ -1,4 +1,5 @@
-{ lib, ... }: {
+{ lib, ... }:
+{
   programs.git = {
     enable = true;
     userName = "Kyunghyun Park";

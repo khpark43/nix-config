@@ -5,7 +5,8 @@
   config,
   outputs,
   ...
-}: {
+}:
+{
   imports = [
     ./desktop/firefox.nix
     ./desktop/kitty.nix
@@ -58,15 +59,13 @@
     btop.enable = true;
     gnome-shell = {
       enable = true;
-      extensions = [
-        {package = pkgs.gnomeExtensions.kimpanel;}
-      ];
+      extensions = [ { package = pkgs.gnomeExtensions.kimpanel; } ];
     };
     chromium = {
       enable = true;
       extensions = [
-        {id = "nngceckbapebfimnlniiiahkandclblb";} # bitwarden
-        {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # ublock origin
+        { id = "nngceckbapebfimnlniiiahkandclblb"; } # bitwarden
+        { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # ublock origin
       ];
     };
     direnv = {

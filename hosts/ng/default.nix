@@ -1,9 +1,7 @@
-{config, pkgs, ...}:
+{ config, pkgs, ... }:
 
 {
-  imports = [
-    ../common
-  ];
+  imports = [ ../common ];
   wsl.enable = true;
   wsl.defaultUser = "khp";
 
@@ -18,7 +16,10 @@
   users.users.khp = {
     isNormalUser = true;
     description = "Kyunghyun Park";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     shell = pkgs.zsh;
   };
 
