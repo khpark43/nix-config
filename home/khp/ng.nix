@@ -16,7 +16,7 @@
   home = {
     username = "khp";
     homeDirectory = "/home/khp";
-    packages = [ inputs.nixvim.packages.${pkgs.system}.default ];
+    packages = [ inputs.nvf.packages.${pkgs.system}.default ];
 
     file = {
       # ".screenrc".source = dotfiles/screenrc;

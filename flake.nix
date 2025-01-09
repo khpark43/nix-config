@@ -12,6 +12,7 @@
     };
     sops-nix.url = "github:Mic92/sops-nix";
     nixvim.url = "github:khpark43/nixvim-config";
+    nvf.url = "github:khpark43/nvf-config";
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -26,7 +26,7 @@
       pkgs.neofetch
       pkgs.wl-clipboard
       pkgs.zed-editor
-      inputs.nixvim.packages.${pkgs.system}.default
+      inputs.nvf.packages.${pkgs.system}.default
     ];
 
     file = {
