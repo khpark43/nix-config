@@ -37,9 +37,9 @@
     {
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
       nixosConfigurations = {
-        nixos = nixpkgs.lib.nixosSystem {
+        up = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          modules = [ ./hosts/nixos ];
+          modules = [ ./hosts/up ];
           specialArgs = { inherit inputs outputs; };
         };
         ng = nixpkgs.lib.nixosSystem {
@@ -58,7 +58,7 @@
         };
       };
       homeConfigurations = {
-        "khp@nixos" = home-manager.lib.homeManagerConfiguration {
+        "khp@up" = home-manager.lib.homeManagerConfiguration {
           modules = [ ./home/khp ];
           pkgs = import nixpkgs {
             system = "x86_64-linux";
@@ -75,12 +75,15 @@
           extraSpecialArgs = { inherit inputs outputs; };
         };
         "khp@muon" = home-manager.lib.homeManagerConfiguration {
-          modules = [./home/khp/muon.nix];
-          pkgs = import nixpkgs { system = "aarch64-darwin"; config.allowUnfree = true; };
+          modules = [ ./home/khp/muon.nix ];
+          pkgs = import nixpkgs {
+            system = "aarch64-darwin";
+            config.allowUnfree = true;
+          };
           extraSpecialArgs = {
             inherit inputs outputs;
           };
         };
       };
     };
-  }
+}
