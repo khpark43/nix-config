@@ -5,7 +5,7 @@
   wsl.enable = true;
   wsl.defaultUser = "khp";
 
-  networking.hostName = "ng";
+  networking.hostName = "down";
 
   virtualisation.docker.enable = true;
 

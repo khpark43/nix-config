@@ -42,11 +42,11 @@
           modules = [ ./hosts/up ];
           specialArgs = { inherit inputs outputs; };
         };
-        ng = nixpkgs.lib.nixosSystem {
+        down = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
             nixos-wsl.nixosModules.default
-            ./hosts/ng
+            ./hosts/down
           ];
           specialArgs = { inherit inputs outputs; };
         };
@@ -59,15 +59,15 @@
       };
       homeConfigurations = {
         "khp@up" = home-manager.lib.homeManagerConfiguration {
-          modules = [ ./home/khp ];
+          modules = [ ./home/khp/up.nix ];
           pkgs = import nixpkgs {
             system = "x86_64-linux";
             config.allowUnfree = true;
           };
           extraSpecialArgs = { inherit inputs outputs; };
         };
-        "khp@ng" = home-manager.lib.homeManagerConfiguration {
-          modules = [ ./home/khp/ng.nix ];
+        "khp@down" = home-manager.lib.homeManagerConfiguration {
+          modules = [ ./home/khp/down.nix ];
           pkgs = import nixpkgs {
             system = "x86_64-linux";
             config.allowUnfree = true;
