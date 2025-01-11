@@ -5,6 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+    nix-darwin.url = "github:LnL7/nix-darwin";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -27,6 +28,7 @@
       home-manager,
       # systems?
       nixos-wsl,
+      nix-darwin,
       ...
     }@inputs:
     let
@@ -49,6 +51,12 @@
           specialArgs = { inherit inputs outputs; };
         };
       };
+      darwinConfigurations = {
+        muon = nix-darwin.lib.darwinSystem {
+          modules = [ ./hosts/muon ];
+          specialArgs = { inherit inputs outputs; };
+        };
+      };
       homeConfigurations = {
         "khp@nixos" = home-manager.lib.homeManagerConfiguration {
           modules = [ ./home/khp ];
@@ -66,6 +74,13 @@
           };
           extraSpecialArgs = { inherit inputs outputs; };
         };
+        "khp@muon" = home-manager.lib.homeManagerConfiguration {
+          modules = [./home/khp/muon.nix];
+          pkgs = import nixpkgs { system = "aarch64-darwin"; config.allowUnfree = true; };
+          extraSpecialArgs = {
+            inherit inputs outputs;
+          };
+        };
       };
     };
-}
+  }
