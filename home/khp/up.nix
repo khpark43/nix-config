@@ -26,7 +26,7 @@
       pkgs.neofetch
       pkgs.wl-clipboard
       pkgs.zed-editor
-      inputs.nvf.packages.${pkgs.system}.default
+      outputs.packages.${pkgs.system}.my-neovim
     ];
 
     file = {
@@ -67,11 +67,16 @@
         { id = "nngceckbapebfimnlniiiahkandclblb"; } # bitwarden
         { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # ublock origin
       ];
+      commandLineArgs = [ "--ignore-gpu-blocklist" ];
     };
     direnv = {
       enable = true;
       enableZshIntegration = true;
       nix-direnv.enable = true;
+    };
+
+    vscode = {
+      enable = true;
     };
   };
 

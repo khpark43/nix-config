@@ -18,7 +18,7 @@
 
   home.stateVersion = "24.05";
 
-  home.packages = [ inputs.nvf.packages.${pkgs.system}.default ];
+  home.packages = [ outputs.packages.${pkgs.system}.my-neovim ];
 
   home.file = {
     # ".screenrc".source = dotfiles/screenrc;

@@ -20,8 +20,10 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixvim.url = "github:khpark43/nixvim-config";
-    nvf.url = "github:khpark43/nvf-config";
+    nvf = {
+      url = "github:NotAShelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -34,16 +36,30 @@
       nixpkgs,
       # nixpkgs-stable,
       home-manager,
-      # systems?
       nixos-wsl,
       nix-darwin,
+      nvf,
       ...
     }@inputs:
     let
-      inherit (self) outputs;
+      outputs = self;
+      configModule = import ./nvf-conf.nix false;
+      forAllSystems = nixpkgs.lib.genAttrs [
+        "x86_64-linux"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ];
     in
     {
-      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
+      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
+      packages = forAllSystems (system: {
+        my-neovim =
+          (nvf.lib.neovimConfiguration {
+            pkgs = nixpkgs.legacyPackages.${system};
+            modules = [ configModule ];
+          }).neovim;
+      });
       nixosConfigurations = {
         up = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";

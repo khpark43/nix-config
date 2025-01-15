@@ -16,7 +16,7 @@
   home = {
     username = "khp";
     homeDirectory = "/home/khp";
-    packages = [ inputs.nvf.packages.${pkgs.system}.default ];
+    packages = [ outputs.packages.${pkgs.system}.my-neovim ];
 
     file = {
       # ".screenrc".source = dotfiles/screenrc;

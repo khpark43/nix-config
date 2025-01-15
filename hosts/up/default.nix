@@ -5,7 +5,6 @@
     ./hardware-configuration.nix
 
     ../common
-    ./common/sops.nix
   ];
   virtualisation.docker.enable = true;
 
