@@ -1,12 +1,11 @@
 keys:
-  - &khp 3586A37F5FBE2C33F3563DA82ABFA32C5F0545FF
-  - &primary age1vgf3ur50a29pq33cvjftu88z6cy00pf7zh3agga44qtuak9umvtsalmxrx
+  - &users:
+    - &khp age1ldqnta8rvdevu3ry7ahden2wpryqsp88ncdmf3mc7r6qv6y2qcdsf4vtga
+  - &hosts:
+    - &up age1vgf3ur50a29pq33cvjftu88z6cy00pf7zh3agga44qtuak9umvtsalmxrx
 creation_rules:
   - path_regex: hosts/common/secrets.ya?ml$
     key_groups:
       - age:
-        - *primary
-        pgp:
-        - *khp
-  
-
+          - *up
+          - *khp
