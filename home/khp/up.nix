@@ -84,6 +84,7 @@
         pkgs.vscode-extensions.mhutchie.git-graph
         pkgs.vscode-extensions.eamodio.gitlens
         pkgs.vscode-extensions.jnoortheen.nix-ide
+        pkgs.vscode-extensions.rust-lang.rust-analyzer
       ];
     };
   };
