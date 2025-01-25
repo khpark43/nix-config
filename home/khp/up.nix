@@ -83,6 +83,7 @@
         pkgs.vscode-extensions.ms-python.debugpy
         pkgs.vscode-extensions.mhutchie.git-graph
         pkgs.vscode-extensions.eamodio.gitlens
+        pkgs.vscode-extensions.jnoortheen.nix-ide
       ];
     };
   };
