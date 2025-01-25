@@ -13,6 +13,11 @@
     ./cli/gpg.nix
     ./cli/git.nix
   ];
+  home.activation.kitty = lib.hm.dag.entryAfter [ "writeBoundry" ] ''
+    $DRY_RUN_CMD [ -f ~/Applications/kitty.app ] && rm -rf ~/Applications/kitty.app
+    $DRY_RUN_CMD cp -r ${pkgs.kitty}/Applications/kitty.app/ ~/Applications
+    $DRY_RUN_CMD chmod -R 755 ~/Applications/kitty.app
+  '';
   home.username = "khp";
   home.homeDirectory = "/Users/khp";
 
