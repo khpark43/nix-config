@@ -2,28 +2,33 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
 
     ../common
   ];
   virtualisation.docker.enable = true;
+  boot = {
+    # Bootloader.
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
+    kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
+  };
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelParams = ["nvidia.NVreg_PreserveVideoMemoryAllocations=1"];
+  networking = {
+    hostName = "up"; # Define your hostname.
+    interfaces.enp5s0.wakeOnLan.enable = true;
+    # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  networking.hostName = "up"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+    # Configure network proxy if necessary
+    # networking.proxy.default = "http://user:password@proxy:port/";
+    # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
+    # Enable networking
+    networkmanager.enable = true;
+  };
 
   # Set your time zone.
   time.timeZone = "Asia/Seoul";
@@ -54,48 +59,67 @@
     dina-font
     proggyfonts
   ];
-  services.displayManager = {
-    enable = true;
-    defaultSession = "gnome";
-  };
-  services.xserver = {
-    enable = true;
+
+  services = {
     displayManager = {
-      gdm.enable = true;
-      gdm.autoSuspend = false;
+      enable = true;
+      defaultSession = "gnome";
     };
-    desktopManager.gnome.enable = true;
+    xserver = {
+      enable = true;
+      displayManager = {
+        gdm.enable = true;
+        gdm.autoSuspend = false;
+      };
+      desktopManager.gnome.enable = true;
+    };
+
+    # Configure keymap in X11
+    xserver.xkb = {
+      layout = "us";
+      variant = "";
+    };
+
+    openssh = {
+      enable = true;
+      ports = [ 22 ];
+      settings = {
+        PasswordAuthentication = false;
+        AllowUsers = [ "khp" ];
+        UseDns = true;
+        X11Forwarding = true;
+        PermitRootLogin = "no"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
+      };
+    };
+
+    # Enable CUPS to print documents.
+    printing.enable = true;
+
+    pulseaudio.enable = false;
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      # If you want to use JACK applications, uncomment this
+      #jack.enable = true;
+
+      # use the example session manager (no others are packaged yet so this is enabled by default,
+      # no need to redefine it in your config for now)
+      #media-session.enable = true;
+    };
+    xserver.videoDrivers = [ "nvidia" ];
   };
 
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  services.pulseaudio.enable = false;
+  users.users.khp.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGzckBKke3xDDEEvfN9olIdO84GOHjCdceAiORntzEX2 khp@muon"
+  ];
 
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  };
 
   hardware.graphics = {
     enable = true;
   };
-  services.xserver.videoDrivers = ["nvidia"];
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = false;
@@ -112,38 +136,36 @@
       "networkmanager"
       "wheel"
     ];
-    packages = with pkgs; [
-      #  thunderbird
-    ];
     shell = pkgs.zsh; # ?
   };
 
   programs.zsh.enable = true;
   nixpkgs.config.allowUnfree = true;
+  environment = {
+    # List packages installed in system profile. To search, run:
+    # $ nix search wget
+    systemPackages = with pkgs; [
+      git
+      vim
+      wget
+      curl
+      vesktop
+      cudatoolkit
+      linuxPackages.nvidia_x11
+      vlc
+      (chromium.override { enableWideVine = true; })
+    ];
+    variables = {
+      EDITOR = "vim";
+    };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    git
-    vim
-    wget
-    curl
-    vesktop
-    cudatoolkit
-    linuxPackages.nvidia_x11
-    vlc
-    (chromium.override {enableWideVine = true;})
-  ];
-  environment.variables = {
-    EDITOR = "vim";
+    gnome.excludePackages = with pkgs; [
+      epiphany
+      geary
+    ];
+
+    sessionVariables.NIXOS_OZONE_WL = "1";
   };
-
-  environment.gnome.excludePackages = with pkgs; [
-    epiphany
-    geary
-  ];
-
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

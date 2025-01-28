@@ -5,7 +5,8 @@
   config,
   outputs,
   ...
-}: {
+}:
+{
   imports = [
     ./desktop/firefox.nix
     ./desktop/kitty.nix
@@ -58,15 +59,14 @@
     btop.enable = true;
     gnome-shell = {
       enable = true;
-      extensions = [{package = pkgs.gnomeExtensions.kimpanel;}];
+      extensions = [ { package = pkgs.gnomeExtensions.kimpanel; } ];
     };
     chromium = {
       enable = true;
       extensions = [
-        {id = "nngceckbapebfimnlniiiahkandclblb";} # bitwarden
-        {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";} # ublock origin
+        { id = "nngceckbapebfimnlniiiahkandclblb"; } # bitwarden
+        { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # ublock origin
       ];
-      commandLineArgs = ["--ignore-gpu-blocklist"];
     };
     direnv = {
       enable = true;
@@ -85,6 +85,8 @@
         pkgs.vscode-extensions.eamodio.gitlens
         pkgs.vscode-extensions.jnoortheen.nix-ide
         pkgs.vscode-extensions.rust-lang.rust-analyzer
+        pkgs.vscode-extensions.ms-vscode.cpptools
+        pkgs.vscode-extensions.ms-vscode.cpptools-extension-pack
       ];
     };
   };
