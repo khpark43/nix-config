@@ -1,10 +1,15 @@
-{ pkgs, inputs, ... }:
 {
+  pkgs,
+  inputs,
+  ...
+}: {
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = [
     pkgs.vim
     pkgs.ripgrep
+    # pkgs.remmina
+    inputs.nixpkgs-stable.legacyPackages.aarch64-darwin.remmina
   ];
 
   # Auto upgrade nix package and the daemon service.
