@@ -1,5 +1,10 @@
+# This is the sample configuration for nvf, aiming to give you a feel of the default options
+# while certain plugins are enabled. While it may act as one, this is not an overview of nvf's
+# module options. To find a complete overview of nvf's options and examples, visit the manual.
+# https://notashelf.github.io/nvf/options.html
 isMaximal: {
   config.vim = {
+    options.shiftwidth = 2;
     viAlias = true;
     vimAlias = true;
     debugMode = {
@@ -11,7 +16,6 @@ isMaximal: {
     spellcheck = {
       enable = true;
     };
-    preventJunkFiles = true;
 
     lsp = {
       formatOnSave = true;
@@ -172,6 +176,7 @@ isMaximal: {
       icon-picker.enable = isMaximal;
       surround.enable = isMaximal;
       diffview-nvim.enable = true;
+      yanky-nvim.enable = false;
       motion = {
         hop.enable = true;
         leap.enable = true;
