@@ -25,8 +25,8 @@ isMaximal: {
       trouble.enable = true;
       lspSignature.enable = true;
       otter-nvim.enable = isMaximal;
-      lsplines.enable = isMaximal;
-      nvim-docs-view.enable = isMaximal;
+      lsplines.enable = false;
+      nvim-docs-view.enable = false;
     };
 
     debugger = {
@@ -235,7 +235,7 @@ isMaximal: {
     assistant = {
       chatgpt.enable = false;
       copilot = {
-        enable = false;
+        enable = true;
         cmp.enable = isMaximal;
       };
     };
