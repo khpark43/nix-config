@@ -1,15 +1,10 @@
-{
-  inputs,
-  lib,
-  pkgs,
-  config,
-  outputs,
-  ...
-}:
+{ pkgs, outputs, ... }:
 {
   imports = [
+    ./common.nix
     ./desktop/firefox.nix
     ./desktop/kitty.nix
+    ./desktop/vscode.nix
     ./cli/zsh.nix
     ./cli/git.nix
     ./cli/gpg.nix
@@ -42,21 +37,10 @@
       BROWSER = "${pkgs.firefox}/bin/firefox";
     };
 
-    # This value determines the Home Manager release that your configuration is
-    # compatible with. This helps avoid breakage when a new Home Manager release
-    # introduces backwards incompatible changes.
-    #
-    # You should not change this value, even if you update Home Manager. If you do
-    # want to update the value, then make sure to first check the Home Manager
-    # release notes.
     stateVersion = "24.05";
   };
 
   programs = {
-    home-manager.enable = true;
-    ripgrep.enable = true;
-    htop.enable = true;
-    btop.enable = true;
     gnome-shell = {
       enable = true;
       extensions = [ { package = pkgs.gnomeExtensions.kimpanel; } ];
@@ -66,27 +50,6 @@
       extensions = [
         { id = "nngceckbapebfimnlniiiahkandclblb"; } # bitwarden
         { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # ublock origin
-      ];
-    };
-    direnv = {
-      enable = true;
-      enableZshIntegration = true;
-      nix-direnv.enable = true;
-    };
-
-    vscode = {
-      enable = true;
-      extensions = [
-        pkgs.vscode-extensions.vscodevim.vim
-        pkgs.vscode-extensions.ms-python.python
-        pkgs.vscode-extensions.ms-python.vscode-pylance
-        pkgs.vscode-extensions.ms-python.debugpy
-        pkgs.vscode-extensions.mhutchie.git-graph
-        pkgs.vscode-extensions.eamodio.gitlens
-        pkgs.vscode-extensions.jnoortheen.nix-ide
-        pkgs.vscode-extensions.rust-lang.rust-analyzer
-        pkgs.vscode-extensions.ms-vscode.cpptools
-        pkgs.vscode-extensions.ms-vscode.cpptools-extension-pack
       ];
     };
   };
@@ -107,5 +70,5 @@
       "x-scheme-handler/about" = "firefox.desktop";
       "x-scheme-handler/unknown" = "firefox.desktop";
     };
-  }; # Please read the comment before changing.
+  };
 }

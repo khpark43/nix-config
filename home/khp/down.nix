@@ -1,11 +1,4 @@
-{
-  inputs,
-  lib,
-  pkgs,
-  config,
-  outputs,
-  ...
-}:
+{ pkgs, outputs, ... }:
 {
   imports = [
     # ./desktop/kitty.nix
@@ -32,15 +25,5 @@
     # Please read the comment before changing.
     stateVersion = "24.05";
   };
-  programs = {
-    home-manager.enable = true;
-    ripgrep.enable = true;
-    htop.enable = true;
-    btop.enable = true;
-    direnv = {
-      enable = true;
-      enableZshIntegration = true;
-      nix-direnv.enable = true;
-    };
-  };
+  programs = { };
 }
