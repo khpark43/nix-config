@@ -45,7 +45,10 @@ isMaximal: {
       enableExtraDiagnostics = true;
 
       # Languages that will be supported in default and maximal configurations.
-      nix.enable = true;
+      nix = {
+        enable = true;
+        format.type = "nixfmt";
+      };
       markdown.enable = true;
 
       # Languages that are enabled in the maximal configuration.
@@ -252,5 +255,13 @@ isMaximal: {
     presence = {
       neocord.enable = false;
     };
+    keymaps = [
+      {
+        key = "<leader>e";
+        mode = "n";
+        silent = true;
+        action = ":Neotree toggle<CR>";
+      }
+    ];
   };
 }

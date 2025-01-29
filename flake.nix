@@ -34,7 +34,6 @@
     {
       self,
       nixpkgs,
-      nixpkgs-stable,
       home-manager,
       nixos-wsl,
       nix-darwin,
