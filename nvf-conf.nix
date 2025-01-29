@@ -183,7 +183,7 @@ isMaximal: {
       motion = {
         hop.enable = true;
         leap.enable = true;
-        precognition.enable = isMaximal;
+        precognition.enable = false;
       };
 
       images = {
