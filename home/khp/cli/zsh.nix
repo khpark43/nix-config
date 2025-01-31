@@ -2,11 +2,6 @@ _: {
   programs.zsh = {
     enable = true;
     defaultKeymap = "viins";
-    oh-my-zsh = {
-      enable = true;
-      plugins = [ "git" ];
-      theme = "robbyrussell";
-    };
     autosuggestion.enable = true;
     shellAliases = {
       nr = "nixos-rebuild --flake .";
@@ -21,11 +16,6 @@ _: {
       bindkey '^v' edit-command-line
 
       bindkey "^?" backward-delete-char
-
-      bindkey -M menuselect 'h' vi-backward-char
-      bindkey -M menuselect 'j' vi-down-line-or-history
-      bindkey -M menuselect 'k' vi-up-line-or-history
-      bindkey -M menuselect 'l' vi-forward-char
     '';
   };
 }
