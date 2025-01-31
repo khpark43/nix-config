@@ -111,10 +111,6 @@
     xserver.videoDrivers = [ "nvidia" ];
   };
 
-  users.users.khp.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGzckBKke3xDDEEvfN9olIdO84GOHjCdceAiORntzEX2 khp@muon"
-  ];
-
   security.rtkit.enable = true;
 
   hardware.graphics = {
@@ -135,8 +131,12 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "docker"
     ];
     shell = pkgs.zsh; # ?
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGzckBKke3xDDEEvfN9olIdO84GOHjCdceAiORntzEX2 khp@muon"
+    ];
   };
 
   programs.zsh.enable = true;

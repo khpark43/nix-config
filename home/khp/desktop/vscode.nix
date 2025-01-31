@@ -14,6 +14,7 @@
         rust-lang.rust-analyzer
         ms-vscode.cpptools
         ms-vscode.cpptools-extension-pack
+        ms-azuretools.vscode-docker
       ];
     };
   };
