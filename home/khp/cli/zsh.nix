@@ -1,8 +1,15 @@
 _: {
   programs.zsh = {
     enable = true;
-    defaultKeymap = "viins";
     autosuggestion.enable = true;
+    oh-my-zsh = {
+      enable = true;
+      theme = "robbyrussell";
+      plugins = [
+        "git"
+        "vi-mode"
+      ];
+    };
     shellAliases = {
       nr = "nixos-rebuild --flake .";
       nrs = "nixos-rebuild --flake . switch";
