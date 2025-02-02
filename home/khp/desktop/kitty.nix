@@ -12,6 +12,7 @@
     settings = {
       background_opacity = 0.85;
       window_margin_width = 0;
+      cursor_blink_interval = 0;
     };
   };
 }
