@@ -3,6 +3,7 @@
   imports = [
     inputs.home-manager.nixosModules.home-manager
     ./sops.nix
+    ./fonts.nix
   ];
   nix.settings.experimental-features = [
     "nix-command"

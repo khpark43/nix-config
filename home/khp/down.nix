@@ -1,7 +1,8 @@
 { pkgs, outputs, ... }:
 {
   imports = [
-    # ./desktop/kitty.nix
+    ./desktop/kitty.nix
+    ./common.nix
     ./cli/zsh.nix
     ./cli/git.nix
     ./cli/gpg.nix

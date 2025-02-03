@@ -2,8 +2,11 @@
 
 {
   imports = [ ../common ];
-  wsl.enable = true;
-  wsl.defaultUser = "khp";
+  wsl = {
+    enable = true;
+    defaultUser = "khp";
+    startMenuLaunchers = true;
+  };
 
   networking.hostName = "down";
 
@@ -31,6 +34,7 @@
     vim
     wget
     curl
+    kitty
   ];
 
   environment.variables = {
