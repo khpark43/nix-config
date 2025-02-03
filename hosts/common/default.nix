@@ -12,4 +12,10 @@
   nix.settings.access-tokens = ''
     !include ${config.sops.secrets.github-personal-access-token.path}";
   '';
+  programs = {
+    zsh.enable = true;
+    man.enable = true;
+  };
+  time.timeZone = "Asia/Seoul";
+  i18n.defaultLocale = "en_US.UTF-8";
 }

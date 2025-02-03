@@ -19,6 +19,7 @@
 
   networking = {
     hostName = "up"; # Define your hostname.
+    # FIXME: wol
     interfaces.enp5s0.wakeOnLan.enable = true;
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -29,12 +30,6 @@
     # Enable networking
     networkmanager.enable = true;
   };
-
-  # Set your time zone.
-  time.timeZone = "Asia/Seoul";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
 
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "ko_KR.UTF-8";
@@ -127,7 +122,6 @@
     ];
   };
 
-  programs.zsh.enable = true;
   nixpkgs.config.allowUnfree = true;
   environment = {
     # List packages installed in system profile. To search, run:

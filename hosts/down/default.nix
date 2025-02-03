@@ -12,10 +12,6 @@
 
   virtualisation.docker.enable = true;
 
-  time.timeZone = "Asia/Seoul";
-
-  i18n.defaultLocale = "en_US.UTF-8";
-
   users.users.khp = {
     isNormalUser = true;
     description = "Kyunghyun Park";
@@ -26,19 +22,21 @@
     shell = pkgs.zsh;
   };
 
-  programs.zsh.enable = true;
   nixpkgs.config.allowUnfree = true;
+  services.xserver.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    git
-    vim
-    wget
-    curl
-    kitty
-  ];
+  environment = {
+    systemPackages = with pkgs; [
+      git
+      vim
+      wget
+      curl
+      kitty
+    ];
 
-  environment.variables = {
-    EDITOR = "vim";
+    variables = {
+      EDITOR = "vim";
+    };
   };
   system.stateVersion = "24.05";
 }
