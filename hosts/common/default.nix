@@ -1,4 +1,9 @@
-{ inputs, config, ... }:
+{
+  inputs,
+  config,
+  pkgs,
+  ...
+}:
 {
   imports = [
     inputs.home-manager.nixosModules.home-manager
@@ -14,8 +19,9 @@
   '';
   programs = {
     zsh.enable = true;
-    man.enable = true;
   };
+  documentation.man.enable = true;
+  environment.systemPackages = [ pkgs.man-pages ];
   time.timeZone = "Asia/Seoul";
   i18n.defaultLocale = "en_US.UTF-8";
 }
