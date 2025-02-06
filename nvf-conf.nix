@@ -2,7 +2,8 @@
 # while certain plugins are enabled. While it may act as one, this is not an overview of nvf's
 # module options. To find a complete overview of nvf's options and examples, visit the manual.
 # https://notashelf.github.io/nvf/options.html
-isMaximal: {
+{ isMaximal, pkgs }:
+{
   config.vim = {
     options = {
       tabstop = 4;
@@ -30,7 +31,7 @@ isMaximal: {
       lspkind.enable = false;
       lightbulb.enable = true;
       lspsaga.enable = false;
-      trouble.enable = true;
+      trouble.enable = false;
       lspSignature.enable = true;
       otter-nvim.enable = isMaximal;
       lsplines.enable = false;
@@ -65,8 +66,8 @@ isMaximal: {
       css.enable = isMaximal;
       html.enable = isMaximal;
       sql.enable = isMaximal;
-      java.enable = isMaximal;
-      kotlin.enable = isMaximal;
+      java.enable = false;
+      kotlin.enable = false;
       ts.enable = isMaximal;
       go.enable = isMaximal;
       lua.enable = isMaximal;

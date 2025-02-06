@@ -42,7 +42,6 @@
     }@inputs:
     let
       outputs = self;
-      configModule = import ./nvf-conf.nix true;
       forAllSystems = nixpkgs.lib.genAttrs [
         "x86_64-linux"
         "aarch64-linux"
@@ -56,7 +55,12 @@
         my-neovim =
           (nvf.lib.neovimConfiguration {
             pkgs = nixpkgs.legacyPackages.${system};
-            modules = [ configModule ];
+            modules = [
+              (import ./nvf-conf.nix {
+                isMaximal = true;
+                pkgs = nixpkgs.legacyPackages.${system}.pkgs;
+              })
+            ];
           }).neovim;
       });
       nixosConfigurations = {
