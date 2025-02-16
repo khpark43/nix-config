@@ -35,6 +35,7 @@
 
     sessionVariables = {
       EDITOR = "nvim";
+      SSH_AUTH_SOCK= "/Users/khp/.bitwarden-ssh-agent.sock";
     };
   };
   programs = { };
