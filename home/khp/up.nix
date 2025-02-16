@@ -21,6 +21,7 @@
       pkgs.neofetch
       pkgs.wl-clipboard
       pkgs.zed-editor
+      pkgs.bitwarden-desktop
       outputs.packages.${pkgs.system}.my-neovim
     ];
 
