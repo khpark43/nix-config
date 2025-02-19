@@ -11,7 +11,7 @@
         mhutchie.git-graph
         eamodio.gitlens
         jnoortheen.nix-ide
-        rust-lang.rust-analyzer
+        # rust-lang.rust-analyzer
         ms-vscode.cpptools
         ms-vscode.cpptools-extension-pack
         ms-azuretools.vscode-docker

@@ -6,7 +6,10 @@
 {
   programs.zed-editor = {
     enable = true;
-    extensions = [ "catppuccin" ];
+    extensions = [
+      "catppuccin"
+      "nix"
+    ];
     userSettings = {
       theme = "Catppuccin Mocha";
       node = {
@@ -14,6 +17,7 @@
         npm_path = lib.getExe' pkgs.nodejs "npm";
       };
       telemetry = {
+        diagnostics = false;
         metrics = false;
       };
       vim_mode = true;
@@ -23,9 +27,18 @@
             "nil"
             "!nixd"
           ];
-          formatter = {
-            external = {
-              command = "nixfmt";
+        };
+      };
+      lsp = {
+        nil = {
+          initialization_options = {
+            formatting = {
+              command = [ "nixfmt" ];
+            };
+          };
+          settings = {
+            diagnostics = {
+              ignored = [ "unused_binding" ];
             };
           };
         };

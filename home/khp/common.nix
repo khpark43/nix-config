@@ -5,6 +5,7 @@ _: {
     htop.enable = true;
     btop.enable = true;
     fzf.enable = true;
+    lazygit.enable = true;
     direnv = {
       enable = true;
       nix-direnv.enable = true;

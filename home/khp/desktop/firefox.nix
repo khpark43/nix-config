@@ -21,10 +21,12 @@
           "Bing".metaData.hidden = true;
         };
       };
-      extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
-        bitwarden
-        ublock-origin
-      ];
+      extensions = {
+        packages = with inputs.firefox-addons.packages.${pkgs.system}; [
+          bitwarden
+          ublock-origin
+        ];
+      };
       bookmarks = [
         {
           name = "Nix";
