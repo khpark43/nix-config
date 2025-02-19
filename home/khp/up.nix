@@ -1,10 +1,16 @@
-{ pkgs, outputs, ... }:
+{
+  pkgs,
+  outputs,
+  lib,
+  ...
+}:
 {
   imports = [
     ./common.nix
     ./desktop/firefox.nix
     ./desktop/kitty.nix
     ./desktop/vscode.nix
+    ./desktop/zed.nix
     ./cli/zsh.nix
     ./cli/git.nix
     ./cli/gpg.nix
@@ -20,8 +26,10 @@
       # '')
       pkgs.neofetch
       pkgs.wl-clipboard
-      pkgs.zed-editor
       pkgs.bitwarden-desktop
+      # pkgs.nixd
+      pkgs.nil
+      pkgs.nixfmt-rfc-style
       outputs.packages.${pkgs.system}.my-neovim
     ];
 
