@@ -135,6 +135,7 @@
       cudatoolkit
       linuxPackages.nvidia_x11
       vlc
+      freecad
       (chromium.override { enableWideVine = true; })
     ];
     variables = {
