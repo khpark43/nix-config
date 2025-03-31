@@ -10,15 +10,15 @@
     profiles.khp = {
       search = {
         force = true;
-        default = "Google";
-        privateDefault = "Google";
-        order = [ "Google" ];
+        default = "google";
+        privateDefault = "google";
+        order = [ "google" ];
         engines = {
           "Kagi" = {
             urls = [ { template = "https://kagi.com/search?q={searchTerms}"; } ];
-            iconUpdateURL = "https://kagi.com/favicon.ico";
+            icon = "https://kagi.com/favicon.ico";
           };
-          "Bing".metaData.hidden = true;
+          "bing".metaData.hidden = true;
         };
       };
       extensions = {
@@ -27,30 +27,33 @@
           ublock-origin
         ];
       };
-      bookmarks = [
-        {
-          name = "Nix";
-          toolbar = true;
-          bookmarks = [
-            {
-              name = "homepage";
-              url = "https://nixos.org/";
-            }
-            {
-              name = "wiki";
-              tags = [
-                "wiki"
-                "nix"
-              ];
-              url = "https://wiki.nixos.org/";
-            }
-            {
-              name = "home-manager search";
-              url = "https://home-manager-options.extranix.com/";
-            }
-          ];
-        }
-      ];
+      bookmarks = {
+        force = true;
+        settings = [
+          {
+            name = "Nix";
+            toolbar = true;
+            bookmarks = [
+              {
+                name = "homepage";
+                url = "https://nixos.org/";
+              }
+              {
+                name = "wiki";
+                tags = [
+                  "wiki"
+                  "nix"
+                ];
+                url = "https://wiki.nixos.org/";
+              }
+              {
+                name = "home-manager search";
+                url = "https://home-manager-options.extranix.com/";
+              }
+            ];
+          }
+        ];
+      };
       settings = {
         "browser.startup.homepage" = "about:home";
 
