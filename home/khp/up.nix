@@ -56,20 +56,14 @@
     };
     chromium = {
       enable = true;
+      package = pkgs.brave;
       extensions = [
         { id = "nngceckbapebfimnlniiiahkandclblb"; } # bitwarden
-        { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # ublock origin
+        # { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # ublock origin
       ];
     };
   };
 
-  i18n.inputMethod = {
-    enabled = "fcitx5";
-    fcitx5.addons = with pkgs; [
-      fcitx5-gtk
-      fcitx5-hangul
-    ];
-  };
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
