@@ -15,7 +15,7 @@ _: {
       hm = "home-manager --flake .";
       hms = "home-manager --flake . switch";
     };
-    initExtra = ''
+    initContent = ''
       # why need in wsl?
       function zle-keymap-select {
         case $KEYMAP in

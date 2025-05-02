@@ -3,7 +3,7 @@
   services.gpg-agent = {
     enable = true;
     enableExtraSocket = true;
-    pinentryPackage = if config.gtk.enable then pkgs.pinentry-gnome3 else pkgs.pinentry-tty;
+    pinentry.package = if config.gtk.enable then pkgs.pinentry-gnome3 else pkgs.pinentry-tty;
   };
   programs.gpg.enable = true;
 
