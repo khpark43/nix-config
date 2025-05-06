@@ -10,13 +10,15 @@
     ./sops.nix
     ./fonts.nix
   ];
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-  nix.settings.access-tokens = ''
-    !include ${config.sops.secrets.github-personal-access-token.path}";
-  '';
+  nix.settings = {
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+    access-tokens = ''
+      !include ${config.sops.secrets.github-personal-access-token.path}";
+    '';
+  };
   programs = {
     zsh.enable = true;
   };
