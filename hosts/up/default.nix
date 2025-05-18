@@ -144,6 +144,7 @@
       linuxPackages.nvidia_x11
       vlc
       freecad
+      kicad
       (chromium.override { enableWideVine = true; })
     ];
     variables = {
