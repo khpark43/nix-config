@@ -28,6 +28,11 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprland.url = "github:hyprwm/Hyprland";
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -66,7 +71,17 @@
       nixosConfigurations = {
         up = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          modules = [ ./hosts/up ];
+          modules = [
+            ./hosts/up
+            inputs.stylix.nixosModules.stylix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.khp = import ./home/khp/up.nix;
+              home-manager.extraSpecialArgs = { inherit inputs outputs; };
+            }
+          ];
           specialArgs = { inherit inputs outputs; };
         };
         down = nixpkgs.lib.nixosSystem {
@@ -85,14 +100,14 @@
         };
       };
       homeConfigurations = {
-        "khp@up" = home-manager.lib.homeManagerConfiguration {
-          modules = [ ./home/khp/up.nix ];
-          pkgs = import nixpkgs {
-            system = "x86_64-linux";
-            config.allowUnfree = true;
-          };
-          extraSpecialArgs = { inherit inputs outputs; };
-        };
+        # "khp@up" = home-manager.lib.homeManagerConfiguration {
+        #   modules = [ ./home/khp/up.nix ];
+        #   pkgs = import nixpkgs {
+        #     system = "x86_64-linux";
+        #     config.allowUnfree = true;
+        #   };
+        #   extraSpecialArgs = { inherit inputs outputs; };
+        # };
         "khp@down" = home-manager.lib.homeManagerConfiguration {
           modules = [ ./home/khp/down.nix ];
           pkgs = import nixpkgs {

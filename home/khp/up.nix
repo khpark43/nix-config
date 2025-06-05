@@ -14,13 +14,31 @@
     ./cli/zsh.nix
     ./cli/git.nix
     ./cli/gpg.nix
+    ./hyprland
+    ./waybar.nix
+    ./stylix.nix
   ];
+
+  services = {
+    hyprpaper = {
+      enable = true;
+      settings = {
+        wallpaper = [
+          "DP-1,/home/khp/nix-config/AnimeGirlNightSky.jpg"
+        ];
+      };
+    };
+
+    dunst = {
+      enable = true;
+    };
+  };
+
   home = {
     username = "khp";
     homeDirectory = "/home/khp";
 
     packages = [
-      # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
       # (pkgs.writeShellScriptBin "my-hello" ''
       #   echo "Hello, ${config.home.username}!"
       # '')
@@ -43,13 +61,20 @@
 
     sessionVariables = {
       EDITOR = "nvim";
-      BROWSER = "${pkgs.firefox}/bin/firefox";
+      BROWSER = "${pkgs.brave}/bin/brave";
     };
 
     stateVersion = "24.05";
   };
 
   programs = {
+    wlogout = {
+      enable = true;
+    };
+    rofi = {
+      enable = true;
+      package = pkgs.rofi-wayland;
+    };
     gnome-shell = {
       enable = true;
       extensions = [ { package = pkgs.gnomeExtensions.kimpanel; } ];
@@ -59,7 +84,6 @@
       package = pkgs.brave;
       extensions = [
         { id = "nngceckbapebfimnlniiiahkandclblb"; } # bitwarden
-        # { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # ublock origin
       ];
     };
   };
@@ -67,11 +91,11 @@
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "text/html" = "firefox.desktop";
-      "x-scheme-handler/http" = "firefox.desktop";
-      "x-scheme-handler/https" = "firefox.desktop";
-      "x-scheme-handler/about" = "firefox.desktop";
-      "x-scheme-handler/unknown" = "firefox.desktop";
+      "text/html" = "brave-browser.desktop";
+      "x-scheme-handler/http" = "brave-browser.desktop";
+      "x-scheme-handler/https" = "brave-browser.desktop";
+      "x-scheme-handler/about" = "brave-browser.desktop";
+      "x-scheme-handler/unknown" = "brave-browser.desktop";
     };
   };
 }

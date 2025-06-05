@@ -11,7 +11,7 @@
       "nix"
     ];
     userSettings = {
-      theme = "Catppuccin Mocha";
+      theme = lib.mkDefault "Catppuccin Mocha";
       node = {
         path = lib.getExe pkgs.nodejs;
         npm_path = lib.getExe' pkgs.nodejs "npm";

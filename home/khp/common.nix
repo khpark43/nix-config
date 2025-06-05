@@ -1,6 +1,6 @@
 _: {
   programs = {
-    home-manager.enable = true;
+    #home-manager.enable = true;
     ripgrep.enable = true;
     htop.enable = true;
     btop.enable = true;

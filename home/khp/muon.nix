@@ -12,6 +12,7 @@
     ./cli/gpg.nix
     ./cli/git.nix
   ];
+  home-manager.enable = true;
   home = {
     activation.kitty = lib.hm.dag.entryAfter [ "writeBoundry" ] ''
       $DRY_RUN_CMD [ -f ~/Applications/kitty.app ] && rm -rf ~/Applications/kitty.app

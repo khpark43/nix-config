@@ -7,6 +7,7 @@
     ./cli/git.nix
     ./cli/gpg.nix
   ];
+  home-manager.enable = true;
   home = {
     username = "khp";
     homeDirectory = "/home/khp";
