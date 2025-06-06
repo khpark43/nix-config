@@ -8,7 +8,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-
+    ./thunar.nix
     ../common
   ];
   virtualisation.docker.enable = true;
@@ -20,7 +20,7 @@
   };
 
   networking = {
-    hostName = "up"; # Define your hostname.
+    hostName = "up";
     # FIXME: wol
     interfaces.enp5s0.wakeOnLan.enable = true;
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -41,9 +41,9 @@
       fcitx5 = {
         waylandFrontend = true;
         addons = with pkgs; [
-          fcitx5-hangul                 # 한글 엔진
-          fcitx5-configtool             # GUI 설정 툴
-          fcitx5-gtk         # GTK/Qt 브리지
+          fcitx5-hangul # 한글 엔진
+          fcitx5-configtool # GUI 설정 툴
+          fcitx5-gtk # GTK/Qt 브리지
         ];
       };
     };
@@ -63,7 +63,7 @@
   services = {
     displayManager = {
       enable = true;
-      defaultSession = "gnome";
+      defaultSession = "hyprland";
       gdm.enable = true;
       gdm.autoSuspend = false;
     };
@@ -107,6 +107,7 @@
       # no need to redefine it in your config for now)
       #media-session.enable = true;
     };
+    tumbler.enable = true;
   };
 
   security.rtkit.enable = true;
@@ -129,7 +130,7 @@
 
   stylix = {
     enable = true;
-    image = ../../City-Night.png;
+    image = ../../wallpapers/City-Night.png;
     # base16Scheme = {
     #   base00 = "282936";
     #   base01 = "3a3c4e";
@@ -177,9 +178,6 @@
     };
   };
 
-  fonts.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
-  ];
   users.users.khp = {
     isNormalUser = true;
     description = "Kyunghyun Park";
@@ -224,12 +222,12 @@
       geary
     ];
 
-    sessionVariables = {
-      NIXOS_OZONE_WL = "1";
-      CHROMIUM_FLAGS = lib.concatStringsSep " " [
-        "--wayland-text-input-version=3"
-      ];
-    };
+    # sessionVariables = {
+    #   NIXOS_OZONE_WL = "1";
+    #   CHROMIUM_FLAGS = lib.concatStringsSep " " [
+    #     "--wayland-text-input-version=3"
+    #   ];
+    # };
   };
 
   # Some programs need SUID wrappers, can be configured further or are

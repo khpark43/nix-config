@@ -10,8 +10,16 @@
       "catppuccin"
       "nix"
     ];
+    userKeymaps = [
+      {
+        context = "Workspace";
+        bindings = {
+          ctrl-shift-t = "workspace::NewTerminal";
+        };
+      }
+    ];
     userSettings = {
-      theme = lib.mkDefault "Catppuccin Mocha";
+      theme = "Catppuccin Mocha";
       node = {
         path = lib.getExe pkgs.nodejs;
         npm_path = lib.getExe' pkgs.nodejs "npm";

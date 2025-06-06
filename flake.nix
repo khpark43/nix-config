@@ -78,7 +78,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.khp = import ./home/khp/up.nix;
+              home-manager.users.khp = ./home/khp/up.nix;
               home-manager.extraSpecialArgs = { inherit inputs outputs; };
             }
           ];
@@ -100,14 +100,6 @@
         };
       };
       homeConfigurations = {
-        # "khp@up" = home-manager.lib.homeManagerConfiguration {
-        #   modules = [ ./home/khp/up.nix ];
-        #   pkgs = import nixpkgs {
-        #     system = "x86_64-linux";
-        #     config.allowUnfree = true;
-        #   };
-        #   extraSpecialArgs = { inherit inputs outputs; };
-        # };
         "khp@down" = home-manager.lib.homeManagerConfiguration {
           modules = [ ./home/khp/down.nix ];
           pkgs = import nixpkgs {

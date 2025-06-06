@@ -17,16 +17,16 @@
     ./hyprland
     ./waybar.nix
     ./stylix.nix
+    ./rofi
+    ./wlogout
+    ./scripts.nix
+    ./emoji.nix
+    ./fastfetch
   ];
 
   services = {
     hyprpaper = {
       enable = true;
-      settings = {
-        wallpaper = [
-          "DP-1,/home/khp/nix-config/AnimeGirlNightSky.jpg"
-        ];
-      };
     };
 
     dunst = {
@@ -35,13 +35,7 @@
   };
 
   home = {
-    username = "khp";
-    homeDirectory = "/home/khp";
-
     packages = [
-      # (pkgs.writeShellScriptBin "my-hello" ''
-      #   echo "Hello, ${config.home.username}!"
-      # '')
       pkgs.neofetch
       pkgs.wl-clipboard
       pkgs.bitwarden-desktop
@@ -68,12 +62,8 @@
   };
 
   programs = {
-    wlogout = {
+    hyprlock = {
       enable = true;
-    };
-    rofi = {
-      enable = true;
-      package = pkgs.rofi-wayland;
     };
     gnome-shell = {
       enable = true;

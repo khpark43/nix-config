@@ -9,5 +9,8 @@ _: {
       platform = "qtct";
     };
     kitty.enable = false;
+    rofi.enable = false;
+    zed.enable = false;
+    hyprlock.enable = false;
   };
 }

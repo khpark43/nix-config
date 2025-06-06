@@ -14,18 +14,18 @@
     hyprpolkitagent
     hyprland-qtutils # needed for banners and ANR messages
   ];
+
   systemd.user.targets.hyprland-session.Unit.Wants = [
     "xdg-desktop-autostart.target"
   ];
-  # Place Files Inside Home Directory
-  # home.file = {
-  #   "Pictures/Wallpapers" = {
-  #     source = ../../../wallpapers;
-  #     recursive = true;
-  #   };
-  #   ".face.icon".source = ./face.jpg;
-  #   ".config/face.jpg".source = ./face.jpg;
-  # };
+
+  home.file = {
+    "Pictures/Wallpapers" = {
+      source = ../../../wallpapers;
+      recursive = true;
+    };
+    # ".face.icon".source = ./face.jpg;
+  };
   wayland.windowManager.hyprland = {
     enable = true;
     package = pkgs.hyprland;
@@ -51,15 +51,11 @@
       #   "nm-applet --indicator"
       #   "pypr &"
       # ];
+      monitor = "DP-1, 2560x1440@144, 0x0, 1";
       input = {
         kb_layout = "us";
-        kb_options = [
-          "grp:alt_caps_toggle"
-          "caps:super"
-        ];
-        numlock_by_default = true;
         repeat_delay = 300;
-        follow_mouse = 1;
+        follow_mouse = 0;
 
         float_switch_override_focus = 0;
         sensitivity = 0;
@@ -86,8 +82,8 @@
         gaps_out = 8;
         border_size = 2;
         resize_on_border = true;
-        # "col.active_border" = "rgb(${config.lib.stylix.colors.base08}) rgb(${config.lib.stylix.colors.base0C}) 45deg";
-        # "col.inactive_border" = "rgb(${config.lib.stylix.colors.base01})";
+        "col.active_border" = "rgb(${config.lib.stylix.colors.base08}) rgb(${config.lib.stylix.colors.base0C}) 45deg";
+        "col.inactive_border" = "rgb(${config.lib.stylix.colors.base01})";
       };
       misc = {
         layers_hog_keyboard_focus = true;
@@ -149,12 +145,5 @@
         mfact = 0.5;
       };
     };
-    extraConfig = "
-      # monitor=,preferred,auto,auto
-      # monitor=Virtual-1,1920x1080@60,auto,1
-      # To enable blur on waybar uncomment the line below
-      # Thanks to SchotjeChrisman
-      #layerrule = blur,waybar
-    ";
   };
 }
