@@ -212,6 +212,8 @@
       libnotify
       xdg-desktop-portal-hyprland
       (chromium.override { enableWideVine = true; })
+      mpv
+      ffmpeg
     ];
     variables = {
       EDITOR = "vim";
