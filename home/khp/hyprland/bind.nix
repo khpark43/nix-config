@@ -3,7 +3,7 @@ _: {
     "$mod" = "SUPER";
     bind =
       [
-        "$mod, b, exec, brave"
+        "$mod, b, exec, brave --wayland-text-input-version=4 --gtk-version=4"
         "$mod, d, exec, kitty"
         "$mod, Q, killactive"
         "$mod SHIFT, Q, exit"

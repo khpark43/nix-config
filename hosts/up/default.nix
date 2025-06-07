@@ -224,12 +224,13 @@
       geary
     ];
 
-    # sessionVariables = {
-    #   NIXOS_OZONE_WL = "1";
-    #   CHROMIUM_FLAGS = lib.concatStringsSep " " [
-    #     "--wayland-text-input-version=3"
-    #   ];
-    # };
+    sessionVariables = {
+      # NIXOS_OZONE_WL = "1";
+      CHROMIUM_FLAGS = lib.concatStringsSep " " [
+        "--wayland-text-input-version=4"
+        "--gtk-version=4"
+      ];
+    };
   };
 
   # Some programs need SUID wrappers, can be configured further or are
