@@ -2,7 +2,7 @@ _: {
   imports = [
     ./hyprland.nix
     ./animations.nix
-    ./bind.nix
+    ./binds.nix
     ./hyprlock.nix
     ./hypridle.nix
   ];

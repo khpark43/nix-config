@@ -22,6 +22,7 @@
     ./scripts.nix
     ./emoji.nix
     ./fastfetch
+    ./swaync.nix
   ];
 
   services = {

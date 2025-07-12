@@ -13,6 +13,7 @@
     ydotool
     hyprpolkitagent
     hyprland-qtutils # needed for banners and ANR messages
+    swww
   ];
 
   systemd.user.targets.hyprland-session.Unit.Wants = [
@@ -37,7 +38,9 @@
     xwayland.enable = true;
     settings = {
       "exec-once" = [
-        "waybar"
+        "wl-paste --type text --watch cliphist store # Stores only text data"
+        "wl-paste --type image --watch cliphist store # Stores only image data"
+        "killall -q waybar;sleep .5 && waybar"
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
       ];
       # exec-once = [

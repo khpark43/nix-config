@@ -42,5 +42,72 @@
       ${pkgs.libnotify}/bin/notify-send "'$chosen' copied to clipboard." &
       fi
     '')
+    (pkgs.writeShellScriptBin "web-search" ''
+      # check if rofi is already running
+      if pidof rofi > /dev/null; then
+        pkill rofi
+      fi
+
+      declare -A URLS
+
+      URLS=(
+        ["🌎 Search"]="https://search.brave.com/search?q="
+        ["❄️ Unstable Packages"]="https://search.nixos.org/packages?channel=unstable&from=0&size=50&sort=relevance&type=packages&query="
+        ["🎞️ YouTube"]="https://www.youtube.com/results?search_query="
+        ["🦥 Arch Wiki"]="https://wiki.archlinux.org/title/"
+        ["🐃 Gentoo Wiki"]="https://wiki.gentoo.org/index.php?title="
+      )
+
+      # List for rofi
+      gen_list() {
+        for i in "''${!URLS[@]}"
+        do
+          echo "$i"
+        done
+      }
+
+      main() {
+        # Pass the list to rofi
+        platform=$( (gen_list) | ${pkgs.rofi-wayland}/bin/rofi -dmenu -config ~/.config/rofi/config-long.rasi )
+
+        if [[ -n "$platform" ]]; then
+          query=$( (echo ) | ${pkgs.rofi-wayland}/bin/rofi -dmenu -config ~/.config/rofi/config-long.rasi )
+
+          if [[ -n "$query" ]]; then
+            url=''${URLS[$platform]}$query
+            xdg-open "$url"
+          else
+            exit
+          fi
+        else
+          exit
+        fi
+      }
+
+      main
+
+      exit 0
+    '')
+    (pkgs.writeShellScriptBin "wallsetter" ''
+      TIMEOUT=720
+
+      for pid in $(pidof -o %PPID -x wallsetter); do
+        kill $pid
+      done
+
+      if ! [ -d ~/Pictures/Wallpapers ]; then notify-send -t 5000 "~/Pictures/Wallpapers does not exist" && exit 1; fi
+      if [ $(ls -1 ~/Pictures/Wallpapers | wc -l) -lt 1 ]; then	notify-send -t 9000 "The wallpaper folder is expected to have more than 1 image. Exiting Wallsetter." && exit 1; fi
+
+      while true; do
+        while [ "$WALLPAPER" == "$PREVIOUS" ]; do
+          WALLPAPER=$(find ~/Pictures/Wallpapers -name '*' | awk '!/.git/' | tail -n +2 | shuf -n 1)
+        done
+
+        PREVIOUS=$WALLPAPER
+
+        ${pkgs.swww}/bin/swww img "$WALLPAPER" --transition-type random --transition-step 1 --transition-fps 60
+        sleep $TIMEOUT
+      done
+    '')
   ];
 }

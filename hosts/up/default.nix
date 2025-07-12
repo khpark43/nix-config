@@ -214,6 +214,8 @@
       (chromium.override { enableWideVine = true; })
       mpv
       ffmpeg
+      hyprprop
+      cliphist
     ];
     variables = {
       EDITOR = "vim";
