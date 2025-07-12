@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   home.packages = [
     (pkgs.writeShellScriptBin "list-keybinds" ''
       # check if rofi is already running

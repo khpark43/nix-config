@@ -21,6 +21,7 @@
           editor.fontFamily = "JetBrainsMono Nerd Font";
           editor.fontLigatures = true;
           terminal.integrated.fontFamily = "JetBrainsMono Nerd Font";
+          python.analysis.typeCheckingMode = "standard";
         });
       };
     };

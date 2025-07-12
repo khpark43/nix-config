@@ -29,9 +29,9 @@
     hyprpaper = {
       enable = true;
     };
-
-    dunst = {
+    nextcloud-client = {
       enable = true;
+      startInBackground = true;
     };
   };
 
