@@ -108,6 +108,7 @@
       #media-session.enable = true;
     };
     tumbler.enable = true;
+    tailscale.enable = true;
   };
 
   security.rtkit.enable = true;
