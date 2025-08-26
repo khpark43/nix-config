@@ -95,7 +95,16 @@
       };
       darwinConfigurations = {
         muon = nix-darwin.lib.darwinSystem {
-          modules = [ ./hosts/muon ];
+          modules = [
+            ./hosts/muon
+            home-manager.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.khp = ./home/khp/muon.nix;
+              home-manager.extraSpecialArgs = { inherit inputs outputs; };
+            }
+          ];
           specialArgs = { inherit inputs outputs; };
         };
       };
@@ -107,16 +116,6 @@
             config.allowUnfree = true;
           };
           extraSpecialArgs = { inherit inputs outputs; };
-        };
-        "khp@muon" = home-manager.lib.homeManagerConfiguration {
-          modules = [ ./home/khp/muon.nix ];
-          pkgs = import nixpkgs {
-            system = "aarch64-darwin";
-            config.allowUnfree = true;
-          };
-          extraSpecialArgs = {
-            inherit inputs outputs;
-          };
         };
       };
     };
