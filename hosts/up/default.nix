@@ -22,7 +22,10 @@
   networking = {
     hostName = "up";
     # FIXME: wol
-    interfaces.enp5s0.wakeOnLan.enable = true;
+    interfaces.enp5s0.wakeOnLan = {
+      enable = true;
+      policy = [ "magic" ];
+    };
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
     # Configure network proxy if necessary
@@ -31,6 +34,7 @@
 
     # Enable networking
     networkmanager.enable = true;
+    nameservers = [ "1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one" ];
   };
 
   i18n = {
@@ -69,6 +73,8 @@
     };
     desktopManager.gnome.enable = true;
 
+    blueman.enable = true;
+
     xserver = {
       enable = true;
       videoDrivers = [ "nvidia" ];
@@ -77,6 +83,21 @@
         variant = "";
       };
       desktopManager.runXdgAutostartIfNone = true;
+    };
+
+    gnome.gnome-keyring.enable = true;
+
+    resolved = {
+      enable = true;
+      dnssec = "true";
+      domains = [ "~." ];
+      fallbackDns = [ "1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one" ];
+      dnsovertls = "true";
+    };
+
+    mullvad-vpn = {
+      enable = true;
+      package = pkgs.mullvad-vpn;
     };
 
     openssh = {
@@ -212,11 +233,17 @@
       pavucontrol
       libnotify
       xdg-desktop-portal-hyprland
+      pyprland
       (chromium.override { enableWideVine = true; })
       mpv
       ffmpeg
       hyprprop
       cliphist
+      wireshark
+      hyprpicker
+      # wineWowPackages.waylandFull
+      wineWowPackages.stable
+      winetricks
     ];
     variables = {
       EDITOR = "vim";

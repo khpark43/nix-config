@@ -32,7 +32,6 @@ with lib;
           "custom/notification"
           "custom/arrow3"
           "custom/exit"
-          "battery"
           "custom/arrow2"
           "tray"
           "custom/arrow1"
@@ -152,31 +151,8 @@ with lib;
           return-type = "json";
           exec-if = "which swaync-client";
           exec = "swaync-client -swb";
-          on-click = "sleep 0.1 && task-waybar";
+          on-click = "sleep 0.1 && ${pkgs.swaynotificationcenter}/bin/swaync-client -t &";
           escape = true;
-        };
-        "battery" = {
-          states = {
-            warning = 30;
-            critical = 15;
-          };
-          format = "{icon} {capacity}%";
-          format-charging = "󰂄 {capacity}%";
-          format-plugged = "󱘖 {capacity}%";
-          format-icons = [
-            "󰁺"
-            "󰁻"
-            "󰁼"
-            "󰁽"
-            "󰁾"
-            "󰁿"
-            "󰂀"
-            "󰂁"
-            "󰂂"
-            "󰁹"
-          ];
-          on-click = "";
-          tooltip = false;
         };
         "custom/arrow1" = {
           format = "";
@@ -247,7 +223,7 @@ with lib;
           font-size: 20px;
           background: #${config.lib.stylix.colors.base0B};
         }
-        #custom-hyprbindings, #network, #battery,
+        #custom-hyprbindings, #network,
         #custom-notification, #custom-exit {
           background: #${config.lib.stylix.colors.base0F};
           color: #${config.lib.stylix.colors.base00};

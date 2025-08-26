@@ -10,7 +10,7 @@
       keybinds=$(cat ~/.config/hypr/hyprland.conf | grep -E '^bind')
       display_keybinds=$(echo "$keybinds" | sed 's/\$mod/SUPER/g')
       # display_keybinds=$(echo "$keybinds" | sed -e 's/\$mod/SUPER/g' -e 's/^[[:space:]]*//')
-      echo "$display_keybinds" | rofi -dmenu -i -config ~/.config/rofi/config-long.rasi -mesg "$msg"
+      echo "$display_keybinds" | rofi -x11 -dmenu -i -config ~/.config/rofi/config-long.rasi -mesg "$msg"
     '')
     (pkgs.writeShellScriptBin "screenshootin" ''
       grim -g "$(slurp)" - | swappy -f -
@@ -20,7 +20,7 @@
       if pidof rofi > /dev/null; then
         pkill rofi
       fi
-      rofi -show drun
+      rofi -x11 -show drun # no input method support on wayland yet
     '')
     (pkgs.writeShellScriptBin "emopicker9000" ''
       # check if rofi is already running
@@ -28,7 +28,7 @@
         pkill rofi
       fi
 
-      # Get user selection via wofi from emoji file.
+      # Get user selection via rofi from emoji file.
       chosen=$(cat $HOME/.config/.emoji | ${pkgs.rofi-wayland}/bin/rofi -i -dmenu -config ~/.config/rofi/config-long.rasi | awk '{print $1}')
 
       # Exit if none chosen.
@@ -52,27 +52,27 @@
       declare -A URLS
 
       URLS=(
-        ["🌎 Search"]="https://search.brave.com/search?q="
+        ["🌎 Search"]="https://www.google.com/search?q="
         ["❄️ Unstable Packages"]="https://search.nixos.org/packages?channel=unstable&from=0&size=50&sort=relevance&type=packages&query="
         ["🎞️ YouTube"]="https://www.youtube.com/results?search_query="
         ["🦥 Arch Wiki"]="https://wiki.archlinux.org/title/"
         ["🐃 Gentoo Wiki"]="https://wiki.gentoo.org/index.php?title="
       )
-
+      ORDER=("🌎 Search" "❄️ Unstable Packages" "🎞️ YouTube" "🦥 Arch Wiki" "🐃 Gentoo Wiki")
+    
       # List for rofi
       gen_list() {
-        for i in "''${!URLS[@]}"
-        do
+        for i in "''${ORDER[@]}"; do
           echo "$i"
         done
       }
 
       main() {
         # Pass the list to rofi
-        platform=$( (gen_list) | ${pkgs.rofi-wayland}/bin/rofi -dmenu -config ~/.config/rofi/config-long.rasi )
+        platform=$( (gen_list) | ${pkgs.rofi-wayland}/bin/rofi -x11 -dmenu -config ~/.config/rofi/config-long.rasi )
 
         if [[ -n "$platform" ]]; then
-          query=$( (echo ) | ${pkgs.rofi-wayland}/bin/rofi -dmenu -config ~/.config/rofi/config-long.rasi )
+          query=$( (echo ) | ${pkgs.rofi-wayland}/bin/rofi -x11 -dmenu -config ~/.config/rofi/config-long.rasi )
 
           if [[ -n "$query" ]]; then
             url=''${URLS[$platform]}$query

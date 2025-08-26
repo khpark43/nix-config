@@ -5,5 +5,6 @@ _: {
     ./binds.nix
     ./hyprlock.nix
     ./hypridle.nix
+    ./pyprland.nix
   ];
 }

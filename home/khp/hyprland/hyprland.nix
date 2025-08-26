@@ -42,8 +42,11 @@
         "wl-paste --type image --watch cliphist store # Stores only image data"
         "killall -q waybar;sleep .5 && waybar"
         "killall -q swww-daemon;sleep .5 && swww-daemon"
-        "killall -q swaync;sleep .5 && swaync"
+        # "killall -q swaync;sleep .5 && swaync"
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        # "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "systemctl --user start hyprpolkitagent"
+        "pypr &"
       ];
       # exec-once = [
       #   "wl-paste --type text --watch cliphist store # Stores only text data"
@@ -60,23 +63,26 @@
       input = {
         kb_layout = "us";
         repeat_delay = 300;
-        follow_mouse = 0;
+        follow_mouse = 1;
 
         float_switch_override_focus = 0;
         sensitivity = 0;
         touchpad = {
           natural_scroll = true;
           disable_while_typing = true;
-          scroll_factor = 0.8;
+          clickfinger_behavior = true;
+          tap-to-click = true;
+          scroll_factor = 0.5;
+          drag_3fg = 1;
         };
       };
       gestures = {
-        workspace_swipe = 1;
-        workspace_swipe_fingers = 3;
-        workspace_swipe_distance = 500;
+        workspace_swipe = true;
+        workspace_swipe_fingers = 4;
+        workspace_swipe_distance = 700;
         workspace_swipe_invert = 1;
         workspace_swipe_min_speed_to_force = 30;
-        workspace_swipe_cancel_ratio = 0.5;
+        workspace_swipe_cancel_ratio = 0.2;
         workspace_swipe_create_new = 1;
         workspace_swipe_forever = 1;
       };
@@ -91,6 +97,7 @@
           "rgb(${config.lib.stylix.colors.base08}) rgb(${config.lib.stylix.colors.base0C}) 45deg";
         "col.inactive_border" = "rgb(${config.lib.stylix.colors.base01})";
       };
+      debug.disable_logs = false;
       misc = {
         layers_hog_keyboard_focus = true;
         initial_workspace_tracking = 0;
@@ -141,8 +148,6 @@
         no_warps = true;
       };
       render = {
-        explicit_sync = 1; # Change to 1 to disable
-        explicit_sync_kms = 1;
         direct_scanout = 0;
       };
       master = {

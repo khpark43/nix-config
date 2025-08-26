@@ -8,6 +8,10 @@
       "cmd+f" =
         "launch --type=overlay --stdin-source=@screen_scrollback ${pkgs.bash}/bin/bash -c '${pkgs.fzf}/bin/fzf --no-sort --no-mouse --exact -i --tac | kitty +kitten clipboard'";
       "ctrl+c" = "copy_or_interrupt";
+      "ctrl+v" = "paste_from_clipboard";
+      "ctrl+insert" = "copy_to_clipboard";
+      "shift+insert" = "paste_from_clipboard";
+      "ctrl+backspace" = "send_text all \\x17";
     };
     settings = {
       background_opacity = 0.85;

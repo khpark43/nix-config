@@ -33,6 +33,7 @@
       enable = true;
       startInBackground = true;
     };
+    remmina.enable = true;
   };
 
   home = {
@@ -43,6 +44,7 @@
       # pkgs.nixd
       pkgs.nil
       pkgs.nixfmt-rfc-style
+      pkgs.telegram-desktop
       outputs.packages.${pkgs.system}.my-neovim
     ];
 

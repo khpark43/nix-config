@@ -270,6 +270,16 @@
         silent = true;
         action = ":Neotree toggle<CR>";
       }
+      {
+        key = "<leader>y";
+        mode = ["n" "v"];
+        action = "\"+y";
+      }
+      {
+        key = "<leader>p";
+        mode = ["n" "v"];
+        action = "\"+p";
+      }
     ];
   };
 }
